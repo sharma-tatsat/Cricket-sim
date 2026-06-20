@@ -10,8 +10,8 @@ def teams():
             "players": [
                 {
                     "position": 1,
-                    "first name": "Abhishek",
-                    "last name": "Sharma",
+                    "first_name": "Abhishek",
+                    "last_name": "Sharma",
                     "age": 28,
                     "role": "opening batsman",
                     "style": "Aggresive",
@@ -22,8 +22,8 @@ def teams():
                 },
                 {
                     "position": 10,
-                    "first name": "jasprit",
-                    "last name": "Bumrah",
+                    "first_name": "jasprit",
+                    "last_name": "Bumrah",
                     "age": 31,
                     "role": "Fast Bowler",
                     "style": "Aggresive",
@@ -38,8 +38,8 @@ def teams():
             "players": [
                 {
                     "position": 1,
-                    "first name": "Aiden",
-                    "last name": "Markram",
+                    "first_name": "Aiden",
+                    "last_name": "Markram",
                     "age": 32,
                     "role": "opening batsman",
                     "style": "Balanced",
@@ -50,8 +50,8 @@ def teams():
                 },
                 {
                     "position": 9,
-                    "first name": "kagiso",
-                    "last name": "Rabada",
+                    "first_name": "kagiso",
+                    "last_name": "Rabada",
                     "age": 30,
                     "role": "Fast Bowler",
                     "style": "Aggresive",
@@ -102,32 +102,93 @@ def match(team1, team2):
     return game_facets
 
 
-## matchup betweeen teams logic
 
+def runs() :
+    
+    run = ["wicket",0,1,2,3,4,6]
+    runs_scored = random.choice(run)
+    
+    print(runs_scored)
+    
+    return runs_scored
+
+
+
+def current_players(overs,runs_scored,batting_team = [] , bowling_team = []) : 
+    
+    wicket_fall = 0
+    
+    if runs_scored == "wicket" : 
+        wicket_fall +=1
+    
+    current_batsman = batting_team[wicket_fall]["first_name"]
+    print (current_batsman)
+    
+    if overs%2 == 0 :
+        
+        current_bowler = bowling_team[1]["first_name"]
+        print(current_bowler)
+        
+    else : 
+        
+        current_bowler = bowling_team[0]["first_name"]
+        print(current_bowler)
+        
+    
+    
+    
+## matchup betweeen teams logic
 
 def matchup(team1, team2):
 
-    runs = ["wicket", 0, 1, 2, 3, 4, 6]
 
     teamInfo = teams()
 
     players_team1 = teamInfo[team1]["players"]
     players_team2 = teamInfo[team2]["players"]
 
-    # print(players_team1, "\n")
-    # print(players_team2)
     
     facets_info = match(team1,team2)
     
     if team1 in facets_info["bat"] :
         
-        print(f"Batting Team : {players_team1}\n")
-        print(f"Bowling Team : {players_team2}\n")
+        batting_team = team1
+        bowling_team = team2
+        
+        print(f"Batting XI : {players_team1}\n")
+        print(f"Bowling XI : {players_team2}\n")
     
     else :
+        batting_team = team2
+        bowling_team = team1
         
-        print(f"Batting Team : {players_team2}\n")
-        print(f"Bowling Team : {players_team1}\n") 
+        print(f"Batting XI : {players_team2}\n")
+        print(f"Bowling XI : {players_team1}\n") 
+        
+        
+    
+    overs = 2
+    balls = 6
+    
+    for i in range(overs):
+        
+        
+        
+        for j in range(balls):
+            
+            runs_scored = runs()
+            
+            print(f"Ball {j} : {runs_scored}")
+            current_players(overs+1,runs_scored,players_team1,players_team2)
+        
+    
+    
+        
+
+            
+            
+            
+        
         
         
     
