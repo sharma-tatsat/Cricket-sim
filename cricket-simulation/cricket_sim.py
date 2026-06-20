@@ -1,3 +1,5 @@
+import random
+
 def teams():
 
     team = {
@@ -62,10 +64,28 @@ def teams():
     return team
 
 
+def match(team1 , team2) : 
+    
+    print(f"Match {team1} vs {team2}\n")
+    
+    print("Toss Time ......\n")
+    
+    toss_winner = random.choice([team1 , team2])
+    toss_decision = random.choice(["bat" , "bowl"])
+    
+    print(f"{toss_winner} has won the toss and has elected to {toss_decision}")
+    
+    
+    
+    
+
 def play():
 
-    playerInfo = teams()
-    print(playerInfo)
+    # playerInfo = teams()
+    # players = playerInfo['india']['players']
+    # print(players)
+    
+    match('india' , 'South Africa')
 
 
 play()
