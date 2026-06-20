@@ -1,14 +1,17 @@
 import random
 
+
 def teams():
+
+    ## Team and Player Info
 
     team = {
         "india": {
             "players": [
                 {
                     "position": 1,
-                    "First name": "Abhishek",
-                    "Last name": "Sharma",
+                    "first name": "Abhishek",
+                    "last name": "Sharma",
                     "age": 28,
                     "role": "opening batsman",
                     "style": "Aggresive",
@@ -19,8 +22,8 @@ def teams():
                 },
                 {
                     "position": 10,
-                    "First name": "jasprit",
-                    "Last name": "Bumrah",
+                    "first name": "jasprit",
+                    "last name": "Bumrah",
                     "age": 31,
                     "role": "Fast Bowler",
                     "style": "Aggresive",
@@ -35,8 +38,8 @@ def teams():
             "players": [
                 {
                     "position": 1,
-                    "First name": "Aiden",
-                    "Last name": "Markram",
+                    "first name": "Aiden",
+                    "last name": "Markram",
                     "age": 32,
                     "role": "opening batsman",
                     "style": "Balanced",
@@ -47,8 +50,8 @@ def teams():
                 },
                 {
                     "position": 9,
-                    "First name": "kagiso",
-                    "Last name": "Rabada",
+                    "first name": "kagiso",
+                    "last name": "Rabada",
                     "age": 30,
                     "role": "Fast Bowler",
                     "style": "Aggresive",
@@ -64,28 +67,75 @@ def teams():
     return team
 
 
-def match(team1 , team2) : 
-    
+## Match conditions logic
+
+
+def match(team1, team2):
+
     print(f"Match {team1} vs {team2}\n")
-    
+
     print("Toss Time ......\n")
+
+    ## Toss logic
+
+    toss_winner = random.choice([team1, team2])
+    toss_decision = random.choice(["bat", "bowl"])
+
+    if toss_winner == team1:                                  ## Identifying batting team and bowling team 
+
+        if toss_decision == "bat":
+            game_facets = {"bat": team1, "bowl": team2}
+        else:
+
+            game_facets = {"bat": team2, "bowl": team1}
+    else:
+
+        if toss_decision == "bat":
+
+            game_facets = {"bat": team2, "bowl": team1}
+        else:
+
+            game_facets = {"bat": team1, "bowl": team2}
+
+    print(f"{toss_winner} has won the toss and has elected to {toss_decision}\n")
     
-    toss_winner = random.choice([team1 , team2])
-    toss_decision = random.choice(["bat" , "bowl"])
+    return game_facets
+
+
+## matchup betweeen teams logic
+
+
+def matchup(team1, team2):
+
+    runs = ["wicket", 0, 1, 2, 3, 4, 6]
+
+    teamInfo = teams()
+
+    players_team1 = teamInfo[team1]["players"]
+    players_team2 = teamInfo[team2]["players"]
+
+    # print(players_team1, "\n")
+    # print(players_team2)
     
-    print(f"{toss_winner} has won the toss and has elected to {toss_decision}")
+    facets_info = match(team1,team2)
     
+    if team1 in facets_info["bat"] :
+        
+        print(f"Batting Team : {players_team1}\n")
+        print(f"Bowling Team : {players_team2}\n")
     
+    else :
+        
+        print(f"Batting Team : {players_team2}\n")
+        print(f"Bowling Team : {players_team1}\n") 
+        
+        
     
-    
+
 
 def play():
 
-    # playerInfo = teams()
-    # players = playerInfo['india']['players']
-    # print(players)
-    
-    match('india' , 'South Africa')
+    matchup("india", "South Africa")
 
 
 play()
