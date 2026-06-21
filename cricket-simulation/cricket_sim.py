@@ -81,7 +81,7 @@ def match(team1, team2):
     toss_winner = random.choice([team1, team2])
     toss_decision = random.choice(["bat", "bowl"])
 
-    if toss_winner == team1:                                  ## Identifying batting team and bowling team 
+    if toss_winner == team1:  ## Identifying batting team and bowling team
 
         if toss_decision == "bat":
             game_facets = {"bat": team1, "bowl": team2}
@@ -98,105 +98,93 @@ def match(team1, team2):
             game_facets = {"bat": team1, "bowl": team2}
 
     print(f"{toss_winner} has won the toss and has elected to {toss_decision}\n")
-    
+
     return game_facets
 
 
+def runs():
 
-def runs() :
-    
-    run = ["wicket",0,1,2,3,4,6]
+    run = ["wicket", 0, 1, 2, 3, 4, 6]
     runs_scored = random.choice(run)
-    
-    print(runs_scored)
-    
+
+    # print(runs_scored)
+
     return runs_scored
 
 
+def current_players(overs, runs_scored,wicket_fall,batting_team=[], bowling_team=[]):
 
-def current_players(overs,runs_scored,batting_team = [] , bowling_team = []) : 
-    
-    wicket_fall = 0
-    
-    if runs_scored == "wicket" : 
-        wicket_fall +=1
-    
+
+    if runs_scored == "wicket":
+        wicket_fall += 1
+
     current_batsman = batting_team[wicket_fall]["first_name"]
-    print (current_batsman)
     
-    if overs%2 == 0 :
-        
-        current_bowler = bowling_team[1]["first_name"]
-        print(current_bowler)
-        
-    else : 
-        
+
+    if overs % 2 == 0:
+
         current_bowler = bowling_team[0]["first_name"]
-        print(current_bowler)
-        
+
+    else:
+
+        current_bowler = bowling_team[1]["first_name"]
+
+    current_player = {
+        current_batsman : current_bowler
+    }
     
-    
-    
+    return current_player
+
+
 ## matchup betweeen teams logic
 
 def matchup(team1, team2):
-
 
     teamInfo = teams()
 
     players_team1 = teamInfo[team1]["players"]
     players_team2 = teamInfo[team2]["players"]
 
-    
-    facets_info = match(team1,team2)
-    
-    if team1 in facets_info["bat"] :
-        
+    facets_info = match(team1, team2)
+
+    if team1 in facets_info["bat"]:
+
         batting_team = team1
         bowling_team = team2
-        
+
         print(f"Batting XI : {players_team1}\n")
         print(f"Bowling XI : {players_team2}\n")
-    
-    else :
+
+    else:
         batting_team = team2
         bowling_team = team1
-        
+
         print(f"Batting XI : {players_team2}\n")
-        print(f"Bowling XI : {players_team1}\n") 
-        
-        
-    
-    overs = 2
+        print(f"Bowling XI : {players_team1}\n")
+
+    overs = 4
     balls = 6
-    
+    wicket_fall = 0
+
     for i in range(overs):
         
-        
-        
-        for j in range(balls):
-            
-            runs_scored = runs()
-            
-            print(f"Ball {j} : {runs_scored}")
-            current_players(overs+1,runs_scored,players_team1,players_team2)
-        
-    
-    
-        
+        print(f"over : {i+1}")
 
+        for j in range(balls):
+
+            runs_scored = runs()
+
+            print(f"Ball {j+1} : {runs_scored}")
             
-            
-            
-        
-        
-        
-    
+            players_current = current_players(i + 1, runs_scored, wicket_fall, players_team1, players_team2)
+            print(players_current)
 
 
 def play():
 
-    matchup("india", "South Africa")
+    matchup("india", "South Africa") 
+    
+    
 
 
 play()
